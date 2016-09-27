@@ -1,0 +1,21 @@
+
+
+<div class="wrapper">
+  <div id="page-heading">
+    <h1><i class="fa fa-black-tie fa-lg" aria-hidden="true"></i> List of Executives</h1>
+    <hr/>
+  </div>  
+    
+    <nav class="navbar navbar-default customer-navbar">
+      <div class="container-fluid">
+        <ul class="nav navbar-nav">
+          <li class="active"><%= link_to '<span class="glyphicon glyphicon-th-list"></span> List'.html_safe, employee_details_path %></li>
+          <li><%= link_to '<span class="glyphicon glyphicon-plus"></span> Add new'.html_safe, new_employee_detail_path   %></li>
+          <li><a id="search-employee-item"><span class="glyphicon glyphicon-search"></span> Search</a></li>
+        </ul>
+      </div>
+    </nav>
+    <br/>
+     <%= render 'look_up' %>
+     
+</div>

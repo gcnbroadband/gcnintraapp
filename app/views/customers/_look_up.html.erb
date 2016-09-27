@@ -1,0 +1,77 @@
+<div class="row" id="customer-main-block">
+	<div class="col-md-12"  id="customer-seach-box">
+		<div class="col-md-offset-3 col-md-6 custom-well">
+			<%=form_tag search_customers_path, remote: true, method: :get, id: 'look-up-friend-form' do %>
+			<div class="form-group look-up-friend col-md-7">
+				<%= text_field_tag :search_params, params[:search_params], placeholder: 'Name, user id, email, mobile number', class: 'form-control input-lg', autofocus: true %>
+			</div>
+			<div class="form-group look-up-friend col-md-5">
+				<%=button_tag(type: :submit, class: 'btn btn-lg btn-success look-sub-btn') do %>
+					<span id="search-friend-cont"><i class="fa fa-search" aria-hidden="true"></i> Search</span>
+					<span id="spin-lookup"><i class="fa fa-cog fa-spin fa-lg" aria-hidden="true"></i> Searching...</span>
+				<% end %>
+				<%= link_to '<i class="fa fa-times fa-lg" aria-hidden="true"></i>'.html_safe, customers_path, class: "btn btn-lg btn-danger close-lookup" %>
+			</div>
+			<% end %>
+		</div>
+		<div class="col-md-12">
+			<hr/>
+		</div>
+	</div>	
+
+<% if @customer %> 
+	<% if @customer.size > 0 %>
+		<div class="col-lg-12" id="customer-lookup-results">
+			 <div class="table-responsive resp-table">
+			  <table class="table table-striped customer-list-table">
+			    <thead>
+			      <tr class="danger">
+			        <th>User Id</th>
+			        <th>Employee Id</th>
+			        <th>Date</th>
+			        <th>name</th>
+			        <th>Mobile no</th>
+			        <th>Email</th>
+			        <th>Telephone no</th>
+			        <th>Nationality</th>
+			        <th>Plan</th>
+			        <th>Total amount</th>
+			        <th>Pending amount</th>
+			        <th>action</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			      <% @customer.each do |customer| %>
+			        <tr>
+			          <td><%= customer.connection_id %></td>
+			          <td><%= customer.employee_detail.emp_id %></td>
+			          <td><%= customer.date %></td>
+			          <td><%= customer.name %></td>
+			          <td><%= customer.mobile_no %></td>
+			          <td><%= customer.email %></td>
+			          <td><%= customer.telephone_no %></td>
+			          <td><%= customer.nationality %></td>
+			          <td><%= customer.net_plan %></td>
+			          <td><%= customer.payment_detail.total_amount %></td>
+			          <% customer.bill_books.each do |bill| %>
+			            <% if bill == customer.bill_books.last%>
+			              <td><%= bill.pending_bill.to_i%></td>
+			            <% end %>
+			      	  <% end %>
+			          
+			          <td><%=link_to 'See details', customer_path(customer), class: "btn btn-sm btn-success cust-see-detail-btn" %></td>
+			        </tr>
+			      <% end %>
+			    </tbody>
+			  </table>
+			</div>
+		</div>
+	<% else %>
+		<div class="col-lg-12">
+			<p> No search criteria matches</p>	
+		</div>
+		
+	<% end %>
+<% end %>
+<div class="col-md-12" id="lookup-errors"></div>
+</div>

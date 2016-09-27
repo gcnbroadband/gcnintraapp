@@ -1,0 +1,32 @@
+<div class="wrapper">
+  <div id="page-heading">
+    <h1><span class="glyphicon glyphicon-th-list"></span> List of plans</h1>
+    <hr/>
+  </div>  
+    
+    <nav class="navbar navbar-default customer-navbar">
+      <div class="container-fluid">
+        <ul class="nav navbar-nav">
+          <li><%= link_to '<span class="glyphicon glyphicon-th-list"></span> List'.html_safe, gcn_plans_path %></li>
+          <li class="active"><%= link_to '<span class="glyphicon glyphicon-plus"></span> Add new'.html_safe, new_customer_path %></li>
+        </ul>
+      </div>
+    </nav>
+    <br/>
+
+    <div class="col-lg-6">
+    	<%= form_for @plan do |f| %>
+	    	<div class="form-group">
+	    		<%= f.label :plan_name, "Plan" %>
+	    		<%= f.text_field :plan_name, class: "form-control", placeholder: "Enter plan details" %>
+	    	</div>
+	    	<div class="form-group">
+	    		<%= f.label :plan_price, "Price" %>
+	    		<%= f.text_field :plan_price, class: "form-control", placeholder: "Enter plan price" %>
+	    	</div>
+	    	<div class="form-group">
+	    		<%= f.submit class: "btn btn-md btn-danger" %>
+	    	</div>
+    	<% end %>
+    </div>
+</div>
